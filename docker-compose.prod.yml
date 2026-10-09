@@ -1,0 +1,70 @@
+# Overlay for production on the Synology DS723+.
+# Usage: docker compose -f docker-compose.yml -f docker-compose.prod.yml --env-file .env.prod up -d
+#
+# Differences from the dev compose:
+#   - `app` pulls the prebuilt image from GHCR (no local `build:` block).
+#   - No host port exposure on `app` — Cloudflare Tunnel handles ingress.
+#   - Postgres data is bind-mounted to a DSM shared folder for persistence + backup.
+#   - Both services restart unless explicitly stopped.
+#   - Postgres credentials come from `.env.prod` and may be rotated.
+#   - Optional Watchtower service polls GHCR every 5 minutes and rolls forward only
+#     the BioGravity images (label-scoped via WATCHTOWER_LABEL_ENABLE).
+
+services:
+  app:
+    image: ghcr.io/authrain-cloud-abdullahformuli/biogravity-portfolio:${IMAGE_TAG:-latest}
+    container_name: biogravity-app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      RESEND_FROM: ${RESEND_FROM:-BioGravity Invites <invites@mail.example.com>}
+    ports:
+      - "${APP_PORT:-3020}:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - biogravity-network
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: biogravity-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ${POSTGRES_DATA_DIR:-/volume1/docker/biogravity/postgres-data}:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - biogravity-network
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+
+  watchtower:
+    image: containrrr/watchtower:1.7.1
+    container_name: biogravity-watchtower
+    restart: unless-stopped
+    environment:
+      WATCHTOWER_LABEL_ENABLE: "true"
+      WATCHTOWER_CLEANUP: "true"
+      WATCHTOWER_POLL_INTERVAL: "300"
+      WATCHTOWER_INCLUDE_RESTARTING: "false"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - biogravity-network
+
+networks:
+  biogravity-network:
+    driver: bridge

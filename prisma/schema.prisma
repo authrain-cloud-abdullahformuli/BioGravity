@@ -1,0 +1,182 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl", "linux-musl-openssl-3.0.x", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?  @db.Text
+  access_token       String?  @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?  @db.Text
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  accounts      Account[]
+  sessions      Session[]
+  projects      Project[] @relation("ProjectOwner")
+  memberships   ProjectMember[]
+  changeLogs    ChangeLog[]
+  invitesCreated  ProjectInvite[] @relation("InviteCreator")
+  invitesAccepted ProjectInvite[] @relation("InviteAccepter")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  type        String   @default("Family") // "Family" or "Organization"
+  visibility  String   @default("Private") // "Private" or "Public"
+  shareToken  String?  @unique // For shareable links
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  ownerId     String
+  owner       User     @relation("ProjectOwner", fields: [ownerId], references: [id])
+  members     ProjectMember[]
+  elements    Element[]
+  relationships Relationship[]
+  elementTypes Json?
+  relationshipTypes Json?
+  changeLogs  ChangeLog[]
+  invites     ProjectInvite[]
+}
+
+model ProjectInvite {
+  id               String    @id @default(cuid())
+  token            String    @unique
+  projectId        String
+  project          Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  email            String
+  role             String    // "Viewer" | "Editor" | "Admin"
+  createdById      String
+  createdBy        User      @relation("InviteCreator", fields: [createdById], references: [id])
+  expiresAt        DateTime
+  acceptedAt       DateTime?
+  acceptedById     String?
+  acceptedBy       User?     @relation("InviteAccepter", fields: [acceptedById], references: [id])
+  revokedAt        DateTime?
+  createdAt        DateTime  @default(now())
+  lastSentAt       DateTime?
+  sendFailureCount Int       @default(0)
+  lastSendError    String?
+
+  @@index([projectId])
+  @@index([email])
+}
+
+model ProjectMember {
+  id        String   @id @default(cuid())
+  projectId String
+  userId    String
+  role      String   // "Viewer", "Editor", "Admin"
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId])
+  @@index([projectId])
+}
+
+model Element {
+  id          String   @id @default(cuid())
+  projectId   String
+  name        String
+  type        String
+  description String?
+  pinned      Boolean  @default(false)
+  positionX   Float    @default(0)
+  positionY   Float    @default(0)
+  positionZ   Float    @default(0)
+  dateOfBirth DateTime?
+  imageUrl    String?  @db.Text
+  attributes  Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  fromRelationships Relationship[] @relation("FromElement")
+  toRelationships   Relationship[] @relation("ToElement")
+
+  @@index([projectId])
+}
+
+model Relationship {
+  id          String   @id @default(cuid())
+  projectId   String
+  fromId      String
+  toId        String
+  type        String
+  attributes  Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  from        Element  @relation("FromElement", fields: [fromId], references: [id], onDelete: Cascade)
+  to          Element  @relation("ToElement", fields: [toId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([fromId])
+  @@index([toId])
+}
+
+model ChangeLog {
+  id            String   @id @default(cuid())
+  projectId     String
+  userId        String
+  action        String   // "CREATE", "UPDATE", "DELETE"
+  entityType    String   // "Element", "Relationship"
+  entityId      String
+  entityName    String?
+  previousState Json?
+  newState      Json?
+  createdAt     DateTime @default(now())
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([projectId, createdAt])
+}
+
+// Counter rows for the in-DB rate limiter. One row per (limit-key, window-start).
+// Old rows are pruned opportunistically by the limiter itself.
+model RateLimitBucket {
+  key         String   @id
+  windowStart DateTime
+  count       Int
+
+  @@index([windowStart])
+}

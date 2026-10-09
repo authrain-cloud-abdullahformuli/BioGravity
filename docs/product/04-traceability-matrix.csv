@@ -1,0 +1,103 @@
+story_id,feature_id,epic_id,title,role,priority,status,audit,modules,code_path
+STORY-AUT-001,FEAT-AUT-001,EPIC-AUT,Register with email + password,Unauthenticated,P0,Implemented,No,Auth,src/app/signup/page.tsx
+STORY-AUT-002,FEAT-AUT-002,EPIC-AUT,Log in with email + password,Unauthenticated,P0,Implemented,No,Auth,src/app/login/page.tsx
+STORY-AUT-003,FEAT-AUT-003,EPIC-AUT,Receive JWT session with user.id,System,P0,Implemented,No,Auth,src/lib/auth.ts
+STORY-AUT-004,FEAT-AUT-004,EPIC-AUT,Passwords stored as bcrypt hashes,System,P0,Implemented,No,Auth,src/app/api/register/route.ts
+STORY-AUT-005,FEAT-AUT-005,EPIC-AUT,Open user-menu and log out,Authenticated,P0,Implemented,No,Auth,src/components/user-menu.tsx
+STORY-AUT-006,FEAT-AUT-006,EPIC-AUT,View and edit profile,Authenticated,P1,Implemented,No,Auth,src/app/profile/profile-form.tsx
+STORY-AUT-007,FEAT-AUT-007,EPIC-AUT,Toggle dark/light theme,Any,P1,Implemented,No,Auth,src/components/mode-toggle.tsx
+STORY-AUT-008,FEAT-AUT-008,EPIC-AUT,Server-side redirect on unauthenticated dashboard,Unauthenticated,P0,Implemented,No,Auth,src/app/dashboard/page.tsx
+STORY-AUT-009,FEAT-AUT-007,EPIC-AUT,Theme + 3D background on login/signup screens,Unauthenticated,P2,Implemented,No,Auth+Landing,src/app/login/page.tsx
+STORY-PRJ-001,FEAT-PRJ-001,EPIC-PRJ,Dashboard lists my projects,Authenticated,P0,Implemented,No,Project,src/app/dashboard/page.tsx
+STORY-PRJ-002,FEAT-PRJ-002,EPIC-PRJ,Create a new project,Authenticated,P0,Implemented,No,Project,src/components/dashboard/new-project-dialog.tsx
+STORY-PRJ-003,FEAT-PRJ-003,EPIC-PRJ,Project type applies default schema,Authenticated,P0,Implemented,No,Project,src/lib/data/modern-family.ts
+STORY-PRJ-004,FEAT-PRJ-004,EPIC-PRJ,Open project to Graph/Data/History tabs,Viewer+,P0,Implemented,No,Project,src/app/projects/[id]/page.tsx
+STORY-PRJ-005,FEAT-PRJ-005,EPIC-PRJ,Exit project back to dashboard,Viewer+,P1,Implemented,No,Project,src/components/navbar.tsx
+STORY-PRJ-006,FEAT-PRJ-006,EPIC-PRJ,Delete project permanently,Owner,P1,Implemented,Implicit,Project,src/components/settings/danger-zone.tsx
+STORY-MEM-001,FEAT-MEM-001,EPIC-MEM,Role hierarchy enforced server-side,System,P0,Implemented,No,Auth,src/lib/roles.ts
+STORY-MEM-002,FEAT-MEM-002,EPIC-MEM,Invite a member by email,Owner,P0,Implemented,No,Project,src/components/projects/member-list.tsx
+STORY-MEM-003,FEAT-MEM-003,EPIC-MEM,See members with role badge,Owner,P1,Implemented,No,Project,src/components/projects/member-list.tsx
+STORY-MEM-004,FEAT-MEM-004,EPIC-MEM,Remove a member,Owner,P1,Implemented,No,Project,src/components/projects/member-list.tsx
+STORY-MEM-005,FEAT-MEM-006,EPIC-MEM,Viewer sees read-only Data view,Viewer,P0,Implemented,No,Project,src/components/projects/data-view.tsx
+STORY-MEM-006,FEAT-MEM-005,EPIC-MEM,Viewer cannot enter Schema or Settings,Viewer,P0,Implemented,No,Auth,src/lib/roles.ts
+STORY-GRP-001,FEAT-GRP-001,EPIC-GRP,Render the project in 3D force-directed graph,Viewer+,P0,Implemented,No,Graph,src/components/graph/graph-scene.tsx
+STORY-GRP-002,FEAT-GRP-002,EPIC-GRP,Switch to 2D mode,Viewer+,P1,Implemented,No,Graph,src/components/graph/graph-scene-2d.tsx
+STORY-GRP-003,FEAT-GRP-005,EPIC-GRP,Tune force physics,Viewer+,P1,Implemented,No,Graph,src/components/settings/physics-settings.tsx
+STORY-GRP-004,FEAT-GRP-006,EPIC-GRP,Pin a node to a fixed position,Editor+,P1,Implemented,Yes,Graph,src/store/graph-slice.ts
+STORY-GRP-005,FEAT-GRP-007,EPIC-GRP,Search nodes by text,Viewer+,P0,Implemented,No,Graph,src/components/graph/filter-panel.tsx
+STORY-GRP-006,FEAT-GRP-008,EPIC-GRP,Filter by element type,Viewer+,P1,Implemented,No,Graph,src/components/graph/filter-panel.tsx
+STORY-GRP-007,FEAT-GRP-009,EPIC-GRP,Enter focus mode on a node,Viewer+,P0,Implemented,No,Graph,src/components/graph/focus-controls.tsx
+STORY-GRP-008,FEAT-GRP-009,EPIC-GRP,Expand focus mode by degrees of separation,Viewer+,P1,Implemented,No,Graph,src/components/graph/focus-controls.tsx
+STORY-GRP-009,FEAT-GRP-010,EPIC-GRP,Toggle node labels,Viewer+,P1,Implemented,No,Graph,src/components/graph/navigation-controls.tsx
+STORY-GRP-010,FEAT-GRP-011,EPIC-GRP,Resize all nodes with a slider,Viewer+,P2,Implemented,No,Graph,src/components/graph/node-size-slider.tsx
+STORY-GRP-011,FEAT-GRP-012,EPIC-GRP,Enable generational ordering,Viewer+,P2,Implemented,No,Graph,src/components/graph/generational-toggle.tsx
+STORY-GRP-012,FEAT-GRP-013,EPIC-GRP,Zoom in / out / reset,Viewer+,P0,Implemented,No,Graph,src/components/graph/navigation-controls.tsx
+STORY-GRP-013,FEAT-GRP-014,EPIC-GRP,Pan and orbit the camera,Viewer+,P0,Implemented,No,Graph,src/components/graph/graph-scene.tsx
+STORY-GRP-014,FEAT-GRP-015,EPIC-GRP,Click a node → details panel,Viewer+,P0,Implemented,No,Graph,src/components/graph/details-panel.tsx
+STORY-GRP-015,FEAT-GRP-016,EPIC-GRP,Right-click a node for context menu,Viewer+,P0,Implemented,No,Graph,src/components/graph/graph-context-menu.tsx
+STORY-GRP-016,FEAT-GRP-017,EPIC-GRP,Edit a node from the graph,Editor+,P0,Implemented,Yes,Graph+Data,src/components/graph/node-edit-modal.tsx
+STORY-GRP-017,FEAT-GRP-018,EPIC-GRP,Drag from a node to create a relationship,Editor+,P0,Implemented,Yes,Graph,src/components/graph/link-drag-overlay.tsx
+STORY-GRP-018,FEAT-GRP-018,EPIC-GRP,Cancel a link-creation gesture,Editor+,P1,Implemented,No,Graph,src/components/graph/link-drag-overlay.tsx
+STORY-GRP-019,FEAT-GRP-019,EPIC-GRP,Drag to create a node on the canvas,Editor+,P2,Verify,Yes,Graph,src/components/graph/use-graph-interactions.ts
+STORY-GRP-020,FEAT-GRP-021,EPIC-GRP,Undo / Redo graph mutations,Editor+,P1,Implemented,No,Graph,src/store/history-slice.ts
+STORY-GRP-021,FEAT-GRP-022,EPIC-GRP,Color legend at corner,Viewer+,P1,Implemented,No,Graph,src/components/graph/graph-scene.tsx
+STORY-GRP-022,FEAT-GRP-022,EPIC-GRP,Help dialog from legend,Viewer+,P2,Verify,No,Graph,src/components/graph/graph-scene.tsx
+STORY-GRP-023,FEAT-GRP-023,EPIC-GRP,View insights panel,Viewer+,P1,Implemented,No,Graph,src/components/graph/insights-panel.tsx
+STORY-DAT-001,FEAT-DAT-001,EPIC-DAT,View elements in a table,Viewer+,P0,Implemented,No,Data,src/components/projects/elements-table.tsx
+STORY-DAT-002,FEAT-DAT-002,EPIC-DAT,View relationships in a table,Viewer+,P0,Implemented,No,Data,src/components/projects/relationships-table.tsx
+STORY-DAT-003,FEAT-DAT-003,EPIC-DAT,Add a new element from Data view,Editor+,P0,Implemented,Yes,Data,src/components/projects/add-element-dialog.tsx
+STORY-DAT-004,FEAT-DAT-004,EPIC-DAT,Edit an element inline,Editor+,P0,Implemented,Yes,Data,src/components/projects/edit-element-dialog.tsx
+STORY-DAT-005,FEAT-DAT-005,EPIC-DAT,Add a new relationship from Data view,Editor+,P0,Implemented,Yes,Data,src/components/projects/add-relationship-dialog.tsx
+STORY-DAT-006,FEAT-DAT-006,EPIC-DAT,Edit relationship type,Editor+,P1,Implemented,Yes,Data,src/components/projects/edit-relationship-dialog.tsx
+STORY-DAT-007,FEAT-DAT-007,EPIC-DAT,Type-ahead search for elements,Editor+,P1,Implemented,No,Data,src/components/projects/element-combobox.tsx
+STORY-DAT-008,FEAT-DAT-008,EPIC-DAT,Upload and crop a photo on an element,Editor+,P1,Implemented,Yes,Data,src/components/projects/photo-crop-modal.tsx
+STORY-DAT-009,FEAT-DAT-009,EPIC-DAT,Delete an element,Editor+,P0,Implemented,Yes,Data,src/components/projects/elements-table.tsx
+STORY-DAT-010,FEAT-DAT-010,EPIC-DAT,Delete a relationship,Editor+,P0,Implemented,Yes,Data,src/components/projects/relationships-table.tsx
+STORY-DAT-011,FEAT-DAT-011,EPIC-DAT,Search & filter in Data view,Viewer+,P1,Implemented,No,Data,src/components/projects/data-view.tsx
+STORY-SCH-001,FEAT-SCH-001,EPIC-SCH,Manage element types,Owner,P0,Implemented,No,Schema,src/components/projects/schema-editor.tsx
+STORY-SCH-002,FEAT-SCH-002,EPIC-SCH,Manage relationship types,Owner,P0,Implemented,No,Schema,src/components/projects/schema-editor.tsx
+STORY-SCH-003,FEAT-SCH-003,EPIC-SCH,Pick a hex color per type,Owner,P1,Implemented,No,Schema,src/components/projects/schema-editor.tsx
+STORY-SCH-004,FEAT-SCH-004,EPIC-SCH,Set relationship strength,Owner,P2,Implemented,No,Schema,src/components/projects/schema-editor.tsx
+STORY-SCH-005,FEAT-SCH-005,EPIC-SCH,Validate schema has at least one type,Owner,P0,Implemented,No,Schema,src/components/projects/schema-editor.tsx
+STORY-IMP-001,FEAT-IMP-001,EPIC-IMP,Export project to Excel,Viewer+,P0,Implemented,No,Import/Export,src/components/projects/import-export-controls.tsx
+STORY-IMP-002,FEAT-IMP-002,EPIC-IMP,Import project from Excel,Editor+,P1,Verify,Yes,Import/Export,src/components/projects/import-export-controls.tsx
+STORY-IMP-003,FEAT-IMP-003,EPIC-IMP,Import a GEDCOM file,Editor+,P1,Implemented,Yes,Import/Export,src/lib/gedcom.ts
+STORY-IMP-004,FEAT-IMP-006,EPIC-IMP,Capture canvas screenshot,Viewer+,P2,Implemented,No,Import/Export,src/components/projects/printscreen-button.tsx
+STORY-IMP-005,FEAT-IMP-004,EPIC-IMP,Export GEDCOM,Viewer+,P2,Backlog,No,Import/Export,—
+STORY-IMP-006,FEAT-IMP-005,EPIC-IMP,Export backup zip,Viewer+,P2,Backlog,No,Import/Export,—
+STORY-SET-001,FEAT-SET-001,EPIC-SET,Open project Settings page,Viewer+,P0,Implemented,No,Settings,src/app/projects/[id]/settings/page.tsx
+STORY-SET-002,FEAT-SET-002,EPIC-SET,Adjust force-physics sliders,Viewer+,P1,Implemented,No,Settings+Graph,src/components/settings/physics-settings.tsx
+STORY-SET-003,FEAT-SET-003,EPIC-SET,Toggle project visibility Private/Public,Owner,P0,Implemented,No,Settings+Sharing,src/components/settings/visibility-settings.tsx
+STORY-SET-004,FEAT-SET-004,EPIC-SET,Copy share link,Owner,P1,Implemented,No,Sharing,src/components/settings/visibility-settings.tsx
+STORY-SET-005,FEAT-SET-005,EPIC-SET,Regenerate share token,Owner,P1,Implemented,No,Sharing,src/components/settings/visibility-settings.tsx
+STORY-SET-006,FEAT-SET-006,EPIC-SET,Copy embed iframe code,Owner,P1,Implemented,No,Sharing,src/components/settings/visibility-settings.tsx
+STORY-SET-007,FEAT-SET-007,EPIC-SET,Clear all project data,Owner,P1,Implemented,Implicit,Settings,src/components/settings/danger-zone.tsx
+STORY-SET-008,FEAT-SET-008,EPIC-SET,Delete the project,Owner,P1,Implemented,No,Settings,src/components/settings/danger-zone.tsx
+STORY-PUB-001,FEAT-PUB-001,EPIC-PUB,Open a public project by token,Unauthenticated,P0,Implemented,No,Sharing,src/app/public/[token]/page.tsx
+STORY-PUB-002,FEAT-PUB-003,EPIC-PUB,Embed mode hides chrome,Unauthenticated,P1,Implemented,No,Sharing,src/app/public/[token]/page.tsx
+STORY-PUB-003,FEAT-PUB-004,EPIC-PUB,Public view is strictly read-only,Unauthenticated,P0,Implemented,No,Sharing,src/components/graph/public-graph-view.tsx
+STORY-PUB-004,FEAT-PUB-001,EPIC-PUB,Public viewer can pan/zoom/2D-3D/search,Unauthenticated,P1,Implemented,No,Sharing,src/components/graph/public-graph-view.tsx
+STORY-CHG-001,FEAT-CHG-001,EPIC-CHG,Audit trail captured for every mutation,System,P0,Implemented,Yes,Audit,src/app/api/projects/[id]/elements/route.ts
+STORY-CHG-002,FEAT-CHG-002,EPIC-CHG,Open History tab and see ordered list,Viewer+,P0,Implemented,No,Audit,src/components/projects/history-tab.tsx
+STORY-CHG-003,FEAT-CHG-003,EPIC-CHG,Display relative timestamps and user identity,Viewer+,P1,Implemented,No,Audit,src/lib/dateFormatting.ts
+STORY-CHG-004,FEAT-CHG-004,EPIC-CHG,Restore a previous state from a change entry,Editor+,P1,Implemented,Yes,Audit,src/app/api/projects/[id]/restore/route.ts
+STORY-CHG-005,FEAT-CHG-002,EPIC-CHG,No restore on Public view,Unauthenticated,P1,Implemented,No,Audit+Sharing,src/components/graph/public-graph-view.tsx
+STORY-SED-001,FEAT-SED-001,EPIC-SED,See Seed CTA on an empty project,Editor+,P0,Implemented,No,Seeding,src/components/projects/seed-button.tsx
+STORY-SED-002,FEAT-SED-002,EPIC-SED,Seed the Family demo dataset,Editor+,P0,Implemented,Yes,Seeding,src/lib/data/modern-family.ts
+STORY-SED-003,FEAT-SED-003,EPIC-SED,Seed the Organization demo dataset,Editor+,P0,Implemented,Yes,Seeding,src/lib/data/organization.ts
+STORY-SED-004,FEAT-SED-004,EPIC-SED,Reload after seed,Editor+,P1,Implemented,No,Seeding,src/components/projects/seed-button.tsx
+STORY-LND-001,FEAT-LND-001,EPIC-LND,Render the marketing hero,Unauthenticated,P1,Implemented,No,Landing,src/app/page.tsx
+STORY-LND-002,FEAT-LND-002,EPIC-LND,Animated 3D background reacts to interaction,Unauthenticated,P1,Implemented,No,Landing,src/components/landing/ThreeBackground.tsx
+STORY-LND-003,FEAT-LND-003,EPIC-LND,Auto-redirect to dashboard when logged in,Authenticated,P1,Implemented,No,Landing,src/app/page.tsx
+STORY-NFR-001,FEAT-NFR-001,EPIC-NFR,One-command Docker boot,Engineer,P0,Implemented,—,Infra,docker-compose.yml
+STORY-NFR-002,FEAT-NFR-002,EPIC-NFR,Prisma multi-arch binaries,Engineer,P0,Implemented,—,Infra,prisma/schema.prisma
+STORY-NFR-003,FEAT-NFR-003,EPIC-NFR,WebGPU polyfill for Three.js,End-user,P1,Implemented,—,Graph,src/lib/webgpu-polyfill.ts
+STORY-NFR-004,FEAT-NFR-004,EPIC-NFR,Vitest unit + API tests,Engineer,P1,Implemented,—,Quality,vitest.config.mts
+STORY-NFR-005,FEAT-NFR-005,EPIC-NFR,ESLint + TypeScript strict config,Engineer,P1,Implemented,—,Quality,eslint.config.mjs
+STORY-NFR-006,FEAT-NFR-006,EPIC-NFR,shadcn/ui + Tailwind baseline,Engineer,P1,Implemented,—,UI,components.json
+STORY-GRP-024,FEAT-GRP-025,EPIC-GRP,Toggle Insights panel from graph view,Viewer+,P1,Implemented,No,Graph,src/components/graph/navigation-controls.tsx
+STORY-GRP-025,FEAT-GRP-026,EPIC-GRP,Tune graph physics from a side drawer,Viewer+,P1,Implemented,No,Graph,src/components/graph/graph-canvas.tsx
+STORY-MEM-007,FEAT-MEM-007,EPIC-MEM,Invite an unregistered email via secure copy-link,Owner/Admin,P1,Implemented,Yes,Project/Auth,src/app/api/projects/members/route.ts
+STORY-MEM-008,FEAT-MEM-008,EPIC-MEM,Email invitations automatically via Resend,Owner/Admin,P1,Implemented,Yes,Project/Auth/Email,src/lib/email/send-invite.ts
+STORY-NFR-007,FEAT-NFR-007,EPIC-NFR,CI publishes Docker image to GHCR,Engineer,P1,Implemented,No,Infra,.github/workflows/build-and-push.yml
+STORY-NFR-008,FEAT-NFR-008,EPIC-NFR,Synology DS723+ production deploy via Compose + Watchtower + Cloudflare Tunnel,Operator,P1,Implemented,No,Infra,docker-compose.prod.yml

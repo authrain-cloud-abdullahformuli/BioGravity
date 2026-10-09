@@ -1,0 +1,39 @@
+services:
+  app:
+    container_name: biogravity-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/biogravity
+      NEXTAUTH_URL: http://localhost:3000
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      RESEND_API_KEY: ${RESEND_API_KEY}
+      RESEND_FROM: ${RESEND_FROM:-BioGravity Invites <invites@mail.example.com>}
+    ports:
+      - "3020:3000"
+    depends_on:
+      - postgres
+    networks:
+      - biogravity-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: biogravity-postgres
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: biogravity
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - biogravity-network
+
+networks:
+  biogravity-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

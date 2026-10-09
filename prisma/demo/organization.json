@@ -1,0 +1,133 @@
+{
+  "elements": [
+    {
+      "id": "ceo",
+      "name": "Elena Rodriguez",
+      "type": "Executive",
+      "description": "Chief Executive Officer"
+    },
+    {
+      "id": "cto",
+      "name": "David Chen",
+      "type": "Executive",
+      "description": "Chief Technology Officer"
+    },
+    {
+      "id": "cfo",
+      "name": "Sarah Jenkins",
+      "type": "Executive",
+      "description": "Chief Financial Officer"
+    },
+    {
+      "id": "vpe",
+      "name": "Marcus Thorne",
+      "type": "Management",
+      "description": "VP of Engineering"
+    },
+    {
+      "id": "vpm",
+      "name": "Aisha Khan",
+      "type": "Management",
+      "description": "VP of Marketing"
+    },
+    {
+      "id": "vps",
+      "name": "Robert Miller",
+      "type": "Management",
+      "description": "VP of Sales"
+    },
+    {
+      "id": "hrm",
+      "name": "Linda Wu",
+      "type": "Management",
+      "description": "HR Manager"
+    },
+    {
+      "id": "em1",
+      "name": "James Wilson",
+      "type": "Engineering",
+      "description": "Engineering Manager - Backend"
+    },
+    {
+      "id": "em2",
+      "name": "Sophie Martin",
+      "type": "Engineering",
+      "description": "Engineering Manager - Frontend"
+    },
+    {
+      "id": "tl1",
+      "name": "Kevin Lee",
+      "type": "Engineering",
+      "description": "Tech Lead - Infrastructure"
+    },
+    {
+      "id": "ds1",
+      "name": "Olivia Brown",
+      "type": "Data Science",
+      "description": "Senior Data Scientist"
+    },
+    {
+      "id": "pm1",
+      "name": "Emma Davis",
+      "type": "Product",
+      "description": "Senior Product Manager"
+    }
+  ],
+  "relationships": [
+    {
+      "fromId": "cto",
+      "toId": "ceo",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "cfo",
+      "toId": "ceo",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "vpe",
+      "toId": "cto",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "vpm",
+      "toId": "ceo",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "vps",
+      "toId": "ceo",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "hrm",
+      "toId": "ceo",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "em1",
+      "toId": "vpe",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "em2",
+      "toId": "vpe",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "tl1",
+      "toId": "em1",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "ds1",
+      "toId": "cto",
+      "type": "Reports_To"
+    },
+    {
+      "fromId": "pm1",
+      "toId": "vpe",
+      "type": "Reports_To"
+    }
+  ]
+}

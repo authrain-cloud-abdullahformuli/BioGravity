@@ -1,0 +1,31 @@
+# Secrets — never bake into the image
+.env
+.env.*
+
+# Already-built artifacts
+.next
+out
+build
+coverage
+
+# Dependency caches (rebuilt inside the image)
+node_modules
+.npm-cache
+.yarn
+
+# Source-control + IDE
+.git
+.gitignore
+.vscode
+.idea
+*.swp
+.DS_Store
+
+# Workflow / WIP artifacts (not needed for the runtime image)
+wip
+walkthroughs
+
+# Local Docker overrides
+docker-compose.override.yml
+.dockerignore
+Dockerfile

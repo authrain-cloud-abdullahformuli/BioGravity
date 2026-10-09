@@ -1,0 +1,86 @@
+# Self-contained demo stack — a throwaway BioGravity instance pre-loaded with
+# sample data, for screenshots, screencasts and letting someone click around.
+#
+# Standalone by design: it does NOT layer on docker-compose.yml, so it needs no
+# local build and can run on a NAS straight from the published image. Container
+# names, volume and port are all `demo`-scoped, so it can run side-by-side with
+# a real deployment without touching its data.
+#
+#   docker compose -f docker-compose.demo.yml --env-file .env.demo up -d
+#   docker compose -f docker-compose.demo.yml --env-file .env.demo run --rm seed
+#
+# Re-run the `seed` line to reset to a known state between takes.
+
+services:
+  app:
+    image: ghcr.io/authrain-cloud-abdullahformuli/biogravity-portfolio:${IMAGE_TAG:-latest}
+    container_name: ${STACK_NAME:-biogravity-demo}-app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-demo}:${POSTGRES_PASSWORD:-demo}@postgres:5432/${POSTGRES_DB:-biogravity_demo}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3030}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?set NEXTAUTH_SECRET in .env.demo}
+      # Blocks profile edits and project creation for the shared login, so one
+      # visitor cannot rename the account or clutter the dashboard for others.
+      DEMO_READONLY_EMAIL: ${DEMO_READONLY_EMAIL:-}
+      # No RESEND_API_KEY on purpose — invitations fall back to copy-link, so a
+      # demo instance can never send mail to a real address by accident.
+    ports:
+      - "${DEMO_APP_PORT:-3030}:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - biogravity-demo
+    labels:
+      # Keep Watchtower (if running for the real deployment) away from the demo.
+      com.centurylinklabs.watchtower.enable: "false"
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: ${STACK_NAME:-biogravity-demo}-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-demo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-demo}
+      POSTGRES_DB: ${POSTGRES_DB:-biogravity_demo}
+    volumes:
+      # Named volume, not a bind-mount: `down -v` should nuke demo data cleanly.
+      - biogravity_demo_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-demo} -d ${POSTGRES_DB:-biogravity_demo}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - biogravity-demo
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+
+  # One-shot seeder. Gated behind a profile so `up` never starts it; run it
+  # explicitly with `run --rm seed`. Waits for `app` to be healthy, which means
+  # `prisma migrate deploy` has already completed in the app's entrypoint.
+  seed:
+    image: ghcr.io/authrain-cloud-abdullahformuli/biogravity-portfolio:${IMAGE_TAG:-latest}
+    profiles: ["seed"]
+    entrypoint: ["node", "prisma/seed.mjs"]
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-demo}:${POSTGRES_PASSWORD:-demo}@postgres:5432/${POSTGRES_DB:-biogravity_demo}
+      DEMO_EMAIL: ${DEMO_EMAIL:-demo@example.com}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:-biogravity-demo}
+      DEMO_NAME: ${DEMO_NAME:-Demo User}
+      DEMO_OWNER_EMAIL: ${DEMO_OWNER_EMAIL:-curator@example.com}
+      DEMO_OWNER_PASSWORD: ${DEMO_OWNER_PASSWORD:-biogravity-curator}
+      DEMO_OWNER_NAME: ${DEMO_OWNER_NAME:-Demo Curator}
+    depends_on:
+      app:
+        condition: service_healthy
+    networks:
+      - biogravity-demo
+
+networks:
+  biogravity-demo:
+    driver: bridge
+
+volumes:
+  biogravity_demo_data:

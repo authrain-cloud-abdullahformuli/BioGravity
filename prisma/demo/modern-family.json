@@ -1,0 +1,322 @@
+{
+  "elements": [
+    {
+      "id": "jay",
+      "name": "Jay Pritchett",
+      "type": "Person",
+      "description": "Patriarch of the family"
+    },
+    {
+      "id": "gloria",
+      "name": "Gloria Delgado-Pritchett",
+      "type": "Person",
+      "description": "Jay's wife"
+    },
+    {
+      "id": "manny",
+      "name": "Manny Delgado",
+      "type": "Person",
+      "description": "Gloria's son"
+    },
+    {
+      "id": "joe",
+      "name": "Joe Pritchett",
+      "type": "Person",
+      "description": "Jay and Gloria's son"
+    },
+    {
+      "id": "claire",
+      "name": "Claire Dunphy",
+      "type": "Person",
+      "description": "Jay's daughter"
+    },
+    {
+      "id": "phil",
+      "name": "Phil Dunphy",
+      "type": "Person",
+      "description": "Claire's husband"
+    },
+    {
+      "id": "haley",
+      "name": "Haley Dunphy",
+      "type": "Person",
+      "description": "Claire and Phil's eldest daughter"
+    },
+    {
+      "id": "alex",
+      "name": "Alex Dunphy",
+      "type": "Person",
+      "description": "Claire and Phil's middle daughter"
+    },
+    {
+      "id": "luke",
+      "name": "Luke Dunphy",
+      "type": "Person",
+      "description": "Claire and Phil's son"
+    },
+    {
+      "id": "mitchell",
+      "name": "Mitchell Pritchett",
+      "type": "Person",
+      "description": "Jay's son"
+    },
+    {
+      "id": "cameron",
+      "name": "Cameron Tucker",
+      "type": "Person",
+      "description": "Mitchell's husband"
+    },
+    {
+      "id": "lily",
+      "name": "Lily Tucker-Pritchett",
+      "type": "Person",
+      "description": "Mitchell and Cameron's adopted daughter"
+    },
+    {
+      "id": "rexford",
+      "name": "Rexford Tucker-Pritchett",
+      "type": "Person",
+      "description": "Mitchell and Cameron's adopted son"
+    },
+    {
+      "id": "dylan",
+      "name": "Dylan Marshall",
+      "type": "Person",
+      "description": "Haley's husband"
+    },
+    {
+      "id": "poppy",
+      "name": "Poppy Marshall",
+      "type": "Person",
+      "description": "Haley and Dylan's daughter"
+    },
+    {
+      "id": "george",
+      "name": "George Marshall",
+      "type": "Person",
+      "description": "Haley and Dylan's son"
+    },
+    {
+      "id": "dede",
+      "name": "DeDe Pritchett",
+      "type": "Person",
+      "description": "Jay's ex-wife, mother of Claire and Mitchell"
+    },
+    {
+      "id": "frank",
+      "name": "Frank Dunphy",
+      "type": "Person",
+      "description": "Phil's father"
+    },
+    {
+      "id": "javier",
+      "name": "Javier Delgado",
+      "type": "Person",
+      "description": "Manny's biological father"
+    },
+    {
+      "id": "stella",
+      "name": "Stella",
+      "type": "Pet",
+      "description": "Jay's beloved French Bulldog"
+    },
+    {
+      "id": "larry",
+      "name": "Larry",
+      "type": "Pet",
+      "description": "Mitchell and Cameron's cat"
+    }
+  ],
+  "relationships": [
+    {
+      "fromId": "jay",
+      "toId": "gloria",
+      "type": "Spouse"
+    },
+    {
+      "fromId": "gloria",
+      "toId": "jay",
+      "type": "Spouse"
+    },
+    {
+      "fromId": "jay",
+      "toId": "claire",
+      "type": "Parent"
+    },
+    {
+      "fromId": "jay",
+      "toId": "mitchell",
+      "type": "Parent"
+    },
+    {
+      "fromId": "jay",
+      "toId": "joe",
+      "type": "Parent"
+    },
+    {
+      "fromId": "gloria",
+      "toId": "manny",
+      "type": "Parent"
+    },
+    {
+      "fromId": "gloria",
+      "toId": "joe",
+      "type": "Parent"
+    },
+    {
+      "fromId": "claire",
+      "toId": "phil",
+      "type": "Spouse"
+    },
+    {
+      "fromId": "phil",
+      "toId": "claire",
+      "type": "Spouse"
+    },
+    {
+      "fromId": "claire",
+      "toId": "haley",
+      "type": "Parent"
+    },
+    {
+      "fromId": "claire",
+      "toId": "alex",
+      "type": "Parent"
+    },
+    {
+      "fromId": "claire",
+      "toId": "luke",
+      "type": "Parent"
+    },
+    {
+      "fromId": "phil",
+      "toId": "haley",
+      "type": "Parent"
+    },
+    {
+      "fromId": "phil",
+      "toId": "alex",
+      "type": "Parent"
+    },
+    {
+      "fromId": "phil",
+      "toId": "luke",
+      "type": "Parent"
+    },
+    {
+      "fromId": "mitchell",
+      "toId": "cameron",
+      "type": "Spouse"
+    },
+    {
+      "fromId": "cameron",
+      "toId": "mitchell",
+      "type": "Spouse"
+    },
+    {
+      "fromId": "mitchell",
+      "toId": "lily",
+      "type": "Parent"
+    },
+    {
+      "fromId": "mitchell",
+      "toId": "rexford",
+      "type": "Parent"
+    },
+    {
+      "fromId": "cameron",
+      "toId": "lily",
+      "type": "Parent"
+    },
+    {
+      "fromId": "cameron",
+      "toId": "rexford",
+      "type": "Parent"
+    },
+    {
+      "fromId": "haley",
+      "toId": "dylan",
+      "type": "Spouse"
+    },
+    {
+      "fromId": "dylan",
+      "toId": "haley",
+      "type": "Spouse"
+    },
+    {
+      "fromId": "haley",
+      "toId": "poppy",
+      "type": "Parent"
+    },
+    {
+      "fromId": "haley",
+      "toId": "george",
+      "type": "Parent"
+    },
+    {
+      "fromId": "dylan",
+      "toId": "poppy",
+      "type": "Parent"
+    },
+    {
+      "fromId": "dylan",
+      "toId": "george",
+      "type": "Parent"
+    },
+    {
+      "fromId": "dede",
+      "toId": "claire",
+      "type": "Parent"
+    },
+    {
+      "fromId": "dede",
+      "toId": "mitchell",
+      "type": "Parent"
+    },
+    {
+      "fromId": "frank",
+      "toId": "phil",
+      "type": "Parent"
+    },
+    {
+      "fromId": "javier",
+      "toId": "manny",
+      "type": "Parent"
+    },
+    {
+      "fromId": "jay",
+      "toId": "stella",
+      "type": "Owner"
+    },
+    {
+      "fromId": "stella",
+      "toId": "jay",
+      "type": "Pet"
+    },
+    {
+      "fromId": "gloria",
+      "toId": "stella",
+      "type": "Owner"
+    },
+    {
+      "fromId": "mitchell",
+      "toId": "larry",
+      "type": "Owner"
+    },
+    {
+      "fromId": "cameron",
+      "toId": "larry",
+      "type": "Owner"
+    },
+    {
+      "fromId": "larry",
+      "toId": "mitchell",
+      "type": "Pet"
+    },
+    {
+      "fromId": "larry",
+      "toId": "cameron",
+      "type": "Pet"
+    }
+  ]
+}
